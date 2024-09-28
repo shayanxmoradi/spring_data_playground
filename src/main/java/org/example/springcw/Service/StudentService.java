@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.springcw.dto.StudentRequest;
+import org.example.springcw.dto.StudentResponse;
 import org.example.springcw.entity.Student;
 import org.example.springcw.repository.StudentJpaRepository;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,8 @@ public class StudentService {
         return studentJpaRepository.findByName(shayan);
     }
 
-    public StudentRequest findById(int id) {
-        return  StudentRequest.fromEntity(studentJpaRepository.findById(id).get());
+    public StudentResponse findById(int id) {
+        return  StudentResponse.fromEntity(studentJpaRepository.findById(id).get());
     }
 
     public void deleteStudent(Integer id) {
@@ -34,18 +35,20 @@ public class StudentService {
         studentJpaRepository.deleteById(id);
     }
 
-    public StudentRequest updateStudent(Integer id, Student studentDetails) {
+    public StudentResponse updateStudent(Integer id, StudentRequest studentDetails) {
         Student student = studentJpaRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Student not found"));
-        student.setName(studentDetails.getName());
-        return StudentRequest.fromEntity(studentJpaRepository.save(student));
+        student.setName(studentDetails.name());
+        return StudentResponse.fromEntity(studentJpaRepository.save(student));
     }
 
-    public StudentRequest save(StudentRequest studentRequest) {
+    public StudentResponse save(StudentRequest studentRequest) {
         Student student =new Student();
     student.setId(studentRequest.id());
     student.setName(studentRequest.name());
-       return StudentRequest.fromEntity(studentJpaRepository.save(student));
+       return StudentResponse.fromEntity(studentJpaRepository.save(student));
     }
+
+
 
 }

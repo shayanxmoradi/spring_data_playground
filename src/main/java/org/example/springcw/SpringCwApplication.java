@@ -1,6 +1,7 @@
 package org.example.springcw;
 
 import org.example.springcw.Service.StudentService;
+import org.example.springcw.dto.StudentRequest;
 import org.example.springcw.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,6 +27,10 @@ public class SpringCwApplication {
             System.out.printf("serarch res \n : " +
                               (studentList.isEmpty() ? "empty" : studentList.toString()));
             System.out.println();
+
+            StudentRequest studentRequst= new StudentRequest(5,"asghar");
+            studentService.save(studentRequst);
         };
     }
 }
+
