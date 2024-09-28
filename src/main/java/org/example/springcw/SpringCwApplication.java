@@ -22,9 +22,10 @@ public class SpringCwApplication {
             studentService.findAll()
                     .forEach(System.out::println);
             System.out.println();
-          List<Student> studentList=  studentService.searchByName("shayan");
+            List<Student> studentList = studentService.searchByName("shayan");
             System.out.printf("serarch res \n : " +
-                              (studentList.isEmpty()? "empty":studentList.toString()));
-            System.out.println();        };
+                              (studentList.isEmpty() ? "empty" : studentList.toString()));
+            System.out.println();
+        };
     }
 }
