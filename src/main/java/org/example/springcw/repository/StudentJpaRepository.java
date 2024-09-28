@@ -1,0 +1,17 @@
+package org.example.springcw.repository;
+
+import org.example.springcw.entity.Student;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository// just for readabilty
+public interface StudentJpaRepository extends JpaRepository<Student, Integer> {
+List<Student> findByName(String name);
+@Query("from Student where name=: name")
+//@Query(value = "query",nativeQuery = true)
+List<Student> findByNameCustom(String name);
+}
